@@ -47,7 +47,6 @@ def dashboard(request):
         q2=Q(is_deleted=False)
         t=Task.objects.filter(q1 & q2)
         # print(t)
-        sendpendingemail(t)
         content['data']=t
         return render(request,'todoapp/dashboard.html',content)
 
@@ -180,29 +179,6 @@ def datesort(request,dv):
     return render(request,'todoapp/dashboard.html',content)
 
     
-def sendpendingemail(t):
-    
-    for x in t:
-        if x.status==0:
-            d=x.enddate.day
-            # print(d)
-            curdt=datetime.datetime.now().day
-            
-            diff=d-curdt
-            
-            if diff==1:
-                rec=x.uid.email
-                # print(rec)
-                subject="REMINDER"
-                msg=x.name+" Task is due for 1 day"
-                sender='aniketgade04@gmail.com'
-                send_mail(
-                    subject,
-                    msg,
-                    sender,
-                    [rec],
-                    fail_silently=False,
-        
-                )
+
 
                 

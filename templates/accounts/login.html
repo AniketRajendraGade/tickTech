@@ -1,43 +1,61 @@
-{% extends 'todoapp/base.html' %}
-{% block 'main' %}
-
-<div class="row">
-    <div class="col-md-4 my-5 mx-auto shadow p-4">
-        {% if errmsg %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Document</title>
+</head>
+<body>
+<div class="cointainer">
+    {% if errmsg %}
         <div class="alert alert-danger">
             {{ errmsg }}
         </div>
         {% endif %}
-
-        <h4 align="center" class="my-4">User Login</h4>
-        <hr>
-        <form method="POST" action="/login">
-            {% csrf_token %}
-            <!-- Username  -->
-            <div class="mb-3 ">
-                <label for="Input1" class="form-label"><strong>Username:</strong> </label>
-                <input name="uname" type="email" class="form-control" id="Input1" placeholder="Enter Email Address">
+    <h2>Login</h2>
+    <form method="POST" action="/login">
+        {%csrf_token%}
+        <div class="main">
+            <div class="input">
+                <div class="text">             
+                    <label for="">Email Address</label>
+                </div>
+                <input type="text"  name="uname" placeholder="Enter your email">
             </div>
-            <!-- password  -->
-            <div class="mb-3">
-                <label for="Input2" class="form-label"><strong>Password:</strong> </label>
-                <input name="upass" type="password" class="form-control" id="Input2" placeholder="Enter Your Password">
+            <div class="input">
+                <div class="text">
+                    <label for="">Password</label>
+                </div>
+                <input type="text" name="upass" placeholder="Enter your password">
             </div>
-
-            <div class="mb-3 text-center ">
-                <input type="submit" value="Login" class="btn btn-danger">
+            <div class="input">
+    
+                <button>Login</button>
             </div>
-            <div class="text-center">
-                Not register ? &nbsp;&nbsp;<a href="/register" style="text-decoration: none;">Register</a>
+        </div>
+        <div class="but">
+    
+    
+            <div class="for">
+                <a href="">Forgot Password?</a>
             </div>
-
-            {% if success %}
+    
+            <div class="for">
+    
+                <p>Dont have an account?</p>
+                <a href="/register">Register Now</a>
+            </div>
+    
+        </div>
+        {% if success %}
             <div class="alert alert-success">
                 {{success}}
             </div>
             {% endif %}
-
-        </form>
-    </div>
+    </form>
+    
 </div>
-{% endblock 'main' %}
+</body>
+</html>
